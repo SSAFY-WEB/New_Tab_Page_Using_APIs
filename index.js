@@ -169,6 +169,7 @@ async function renderWeather(){
         acc = acc + weatherWrapperComponent(cur);
         console.log(cur.weather[0].main);
         curWeatherIcon(cur.weather[0].main);
+        curTemperature(cur.main.temp);
         return acc;
     }, "")
 
@@ -182,7 +183,10 @@ function curWeatherIcon(weatherUrl){
     weatherButton.style.backgroundImage = `url(${matchIcon(weatherUrl)})`;    
 }
 
-
+function curTemperature(temperature){
+    const modalTemperature = document.querySelector('.modal-temperature');
+    modalTemperature.textContent=changeToCelsius(temperature)+'˚C';
+}
 
 
 // 명언 파트
