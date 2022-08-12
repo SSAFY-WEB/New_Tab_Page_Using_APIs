@@ -160,12 +160,23 @@ async function renderWeather(){
     console.log(weatherList);
     const weatherComponents = weatherList.reduce((acc, cur) => {
         acc = acc + weatherWrapperComponent(cur);
+        console.log(cur.weather[0].main);
+        curWeatherIcon(cur.weather[0].main);
         return acc;
     }, "")
 
     console.log(weatherComponents);
     document.querySelector(".modal-body").insertAdjacentHTML('beforeend', weatherComponents);
 }
+
+// 우측 상단 날씨 아이콘을 현재 날씨와 맞게 바꾸기
+function curWeatherIcon(weatherUrl){
+    const weatherButton = document.querySelector('.modal-button');
+    weatherButton.style.backgroundImage = `url(${matchIcon(weatherUrl)})`;    
+}
+
+
+
 
 // 명언 파트
 function setQuote(){
