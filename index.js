@@ -175,6 +175,13 @@ async function renderWeather(){
 
     // console.log(weatherComponents);
     document.querySelector(".modal-body").insertAdjacentHTML('beforeend', weatherComponents);
+
+    // 날씨 카드 첫번째 요소 선택 (첫번째 요소 = 오늘)
+    const todayWeatherCard = document.querySelector(".card.bg-transparent.flex-grow-1.m-2");
+    todayWeatherCard.classList.add("border", "border-warning", "border-3");
+    todayWeatherCard.classList.remove("bg-transparent");
+    todayWeatherCard.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+
 }
 
 // 우측 상단 날씨 아이콘을 현재 날씨와 맞게 바꾸기
