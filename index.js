@@ -106,12 +106,12 @@ const changeToCelsius = temp => (temp -273.15).toFixed(1);
 
 
 function weatherWrapperComponent(cur){
-    console.log(cur);
+    // console.log(cur);
    
     return `
         <div class="card bg-transparent flex-grow-1 m-2">
             <div class="card-header text-center">
-                ${cur.dt_txt.split(" ")[0]}
+                ${cur.dt_txt.split(" ")[0]} (${Date(cur.dt).getTime().getDay()})
             </div>
             <div class="card-body text-center">
                 <h5 class="card-title">${cur.weather[0].main}</h5>
@@ -129,26 +129,26 @@ async function renderWeather(){
     let weatherData = null;
     try{
         const position = await getPosition();
-        console.log(position.coords);
+        // console.log(position.coords);
         latitude = position.coords.latitude;
         longitude = position.coords.longitude;
-        console.log(latitude, longitude);
+        // console.log(latitude, longitude);
         const result = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${key}`);
-        console.log(result.data);
+        // console.log(result.data);
         weatherData = result.data;
 
         // 위치 정보 승인 X
     } catch(error){
-        console.log(error);
+        // console.log(error);
         if(!latitude || !longitude) {
-            console.log("test");
+            // console.log("test");
             const result = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=seoul&appid=${key}`);
-            console.log(result);
+            // console.log(result);
             weatherData = result.data;
         }
     }
 
-    console.log(weatherData);
+    // console.log(weatherData);
     const weatherList = weatherData.list.reduce((acc, cur) => {
         if(cur.dt_txt.indexOf("18:00:00") > 0){
             acc.push(cur);
@@ -162,7 +162,7 @@ async function renderWeather(){
         return acc;
     }, "")
 
-    console.log(weatherComponents);
+    // console.log(weatherComponents);
     document.querySelector(".modal-body").insertAdjacentHTML('beforeend', weatherComponents);
 }
 
@@ -185,7 +185,7 @@ function getRandomInt(min, max) {
 }
 
 function quoteWrapperComponent(quote){
-    console.log(quote);
+    // console.log(quote);
     return `
     <div class="quote-content fs-4"> "${quote.text}" </div>
     `;
