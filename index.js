@@ -42,6 +42,7 @@ function setMemo(){
             // memo.textContent = e.target.value;
             localStorage.setItem('todo', e.target.value);
             getMemo();
+            e.target.value="";
         }
     });
 }
