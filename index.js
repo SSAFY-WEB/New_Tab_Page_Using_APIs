@@ -62,11 +62,109 @@ function deleteMemo(){
     })
 }
 
+
+
+// 날씨 파트
+const key ="97e6f42e74244c99353edcf2c4d0133e";
+// 도시명으로 API 호출하는 법
+// api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
+
+// 위도 경도로 API 호출하는 법
+// api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
+
+
+// 위도 경도 받아오기
+function getPosition(options){
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, options);
+    })
+}
+
+
+	
+function matchIcon(weatherData) {
+    if (weatherData === "Clear") return "./images/039-sun.png";
+    if (weatherData === "Clouds") return "./images/001-cloud.png";
+    if (weatherData === "Rain") return "./images/003-rainy.png";
+    if (weatherData === "Snow") return "./images/006-snowy.png";
+    if (weatherData === "Thunderstorm") return "./images/008-storm.png";
+    if (weatherData === "Drizzle") return "./images/031-snowflake.png";
+    if (weatherData === "Atmosphere") return "./images/033-hurricane.png";
+}
+
+// 273.15를 빼고 소수점 한자리까지만 보여주게 만든다.
+const changeToCelsius = temp => (temp -273.15).toFixed(1);
+
+
+function weatherWrapperComponent(cur){
+    console.log(cur);
+   
+    return `
+        <div class="card bg-transparent flex-grow-1 m-2">
+            <div class="card-header text-center">
+                ${cur.dt_txt.split(" ")[0]}
+            </div>
+            <div class="card-body text-center">
+                <h5 class="card-title">${cur.weather[0].main}</h5>
+                <img width="60px" height="60px" src="${matchIcon(cur.weather[0].main)}">
+                <p class="card-text">${changeToCelsius(cur.main.temp)}˚</p>
+            </div>
+        </div>
+    `
+}
+
+async function renderWeather(){
+    // 위치 정보를 승인 O
+    let latitude="";
+    let longitude="";
+    let weatherData = null;
+    try{
+        const position = await getPosition();
+        console.log(position.coords);
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude, longitude);
+        const result = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${key}`);
+        console.log(result.data);
+        weatherData = result.data;
+
+        // 위치 정보 승인 X
+    } catch(error){
+        console.log(error);
+        if(!latitude || !longitude) {
+            console.log("test");
+            const result = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=seoul&appid=${key}`);
+            console.log(result);
+            weatherData = result.data;
+        }
+    }
+
+    console.log(weatherData);
+    const weatherList = weatherData.list.reduce((acc, cur) => {
+        if(cur.dt_txt.indexOf("18:00:00") > 0){
+            acc.push(cur);
+        }
+        return acc;
+    }, [])
+
+    console.log(weatherList);
+    const weatherComponents = weatherList.reduce((acc, cur) => {
+        acc = acc + weatherWrapperComponent(cur);
+        return acc;
+    }, "")
+
+    console.log(weatherComponents);
+    document.querySelector(".modal-body").insertAdjacentHTML('beforeend', weatherComponents);
+}
+
+
 setRenderBackground();
 setTime();
 setMemo();
 getMemo();
 deleteMemo();
+renderWeather();
+
 
 setInterval(() =>{
     setRenderBackground();

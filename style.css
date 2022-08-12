@@ -36,3 +36,16 @@ body{
 .memo{
     font-size: 30px;
 }
+
+/* 날씨 구분 */
+.modal-button{
+    background: url("./images/001-cloud.png");
+    background-size: cover;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+
+    position: fixed;
+    top: 40px;
+    right: 40px;
+}
