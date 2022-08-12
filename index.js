@@ -157,6 +157,32 @@ async function renderWeather(){
     document.querySelector(".modal-body").insertAdjacentHTML('beforeend', weatherComponents);
 }
 
+// 명언 파트
+function setQuote(){
+    const quoteURL = "https://type.fit/api/quotes";
+    const result = axios.get(quoteURL);
+    result.then((data) => {
+        // console.log(data);
+        const quote = data.data[getRandomInt(0, 1643)];
+        // console.log(quote);
+        document.querySelector(".quote-wrapper").insertAdjacentHTML('beforeend',quoteWrapperComponent(quote));
+    });
+}
+
+function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
+}
+
+function quoteWrapperComponent(quote){
+    console.log(quote);
+    return `
+    <div class="quote-content fs-4"> "${quote.text}" </div>
+    `;
+}
+
+
 
 setRenderBackground();
 setTime();
@@ -164,7 +190,7 @@ setMemo();
 getMemo();
 deleteMemo();
 renderWeather();
-
+setQuote();
 
 setInterval(() =>{
     setRenderBackground();

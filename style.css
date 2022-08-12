@@ -19,12 +19,14 @@ body{
     font-weight: 500;
     font-size: 168px;
     line-height: 168px;
+    text-shadow: 5px 5px 5px #000000dd;
 }
 
 .timer-content{
     font-weight: bold;
     font-size: 40px;
     text-align: center;
+    text-shadow: 5px 5px 5px #000000dd;
 }
 
 /* memo */
@@ -32,6 +34,7 @@ body{
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+    text-shadow: 5px 5px 5px #000000dd;
 }
 .memo{
     font-size: 30px;
@@ -48,4 +51,14 @@ body{
     position: fixed;
     top: 40px;
     right: 40px;
+}
+
+/* 명언 파트 */
+.quote-wrapper{
+    width: 900px;
+    text-shadow: 5px 5px 5px #000000dd;
+}
+
+.quote-content{
+    word-wrap: normal;
 }
