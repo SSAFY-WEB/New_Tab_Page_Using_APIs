@@ -16,7 +16,24 @@ function setRenderBackground(){
 }
 
 
+// 시계 설정 파트
+function setTime(){
+    const timer = document.querySelector('.timer');
+    
+    setInterval(() => {
+        const date = new Date();
+        // console.log(date);
+        const hour = date.getHours();
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const second = String(date.getSeconds()).padStart(2, '0');
+        const timeFormat = `${hour}:${minutes}:${second}`;
+        timer.textContent = timeFormat;
+    }, 1000)
+}
+
+
 setRenderBackground();
+setTime();
 
 setInterval(() =>{
     setRenderBackground();
