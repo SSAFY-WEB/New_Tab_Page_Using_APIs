@@ -23,11 +23,20 @@ function setTime(){
     setInterval(() => {
         const date = new Date();
         // console.log(date);
-        const hour = String(date.getHours());
+        const hour = date.getHours();
         const minutes = String(date.getMinutes()).padStart(2, '0');
         const second = String(date.getSeconds()).padStart(2, '0');
         const timeFormat = `${hour}:${minutes}:${second}`;
         timer.textContent = timeFormat;
+        let greetings = "";
+        if (5 <= hour && hour < 12)
+            greetings = "Good Morning, USER";
+        else if (12 <= hour && hour < 18)
+            greetings = "Good Afternoon, USER";
+        else
+            greetings = "Good Evening, USER";
+        document.querySelector(".timer-content").innerHTML = greetings;
+        
     }, 1000)
 }
 
