@@ -108,11 +108,18 @@ const changeToCelsius = temp => (temp -273.15).toFixed(1);
 
 function weatherWrapperComponent(cur){
     // console.log(cur);
+    // cur.dt의 타임스탬프 = Unix timestamp
+    // JS의 timestamp로 변환하기 위해 Unix timestamp * 1000
+    // 또한, api로 받은 cur.dt는 GMT 기준 -> KST로 바꾸기 위해 9시간 차이 반영
+    const timeStamp = new Date(cur.dt * 1000 - 32400000);
+    console.log(timeStamp);
+    const day_num = timeStamp.getDay();
+    const day_list = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
    
     return `
         <div class="card bg-transparent flex-grow-1 m-2">
             <div class="card-header text-center">
-                ${cur.dt_txt.split(" ")[0]} (${Date(cur.dt).getTime().getDay()})
+                ${cur.dt_txt.split(" ")[0]} (${day_list[day_num]})
             </div>
             <div class="card-body text-center">
                 <h5 class="card-title">${cur.weather[0].main}</h5>
