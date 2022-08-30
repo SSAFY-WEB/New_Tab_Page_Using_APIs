@@ -2,7 +2,7 @@
 > 🌱 <strong>바닐라JS</strong>와 <strong>axios 비동기 통신</strong>을 활용한 Momentum 클론 웹프로젝트
 
 
-![GIF 2022-08-30 오후 3-07-37](https://user-images.githubusercontent.com/62277179/187363756-e37735d9-f9a6-4b8c-9a44-718e79695736.gif)
+<video width="90%" src="https://user-images.githubusercontent.com/62277179/187363756-e37735d9-f9a6-4b8c-9a44-718e79695736.gif" loop=1></video>
 
 ----수정중----
 
