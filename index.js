@@ -1,5 +1,8 @@
 // 이미지 설정 파트
 const imageURL = "https://picsum.photos/1280/720";
+
+document.querySelector('body').style.transition = "background-image 3s";
+
 function setRenderBackground(){
     // 이미지, 사운도, 비디오등을 통신하는 경우에는 blob (Binary Large OBject)이라는 속성을 사용
     const result = axios.get(imageURL, {
