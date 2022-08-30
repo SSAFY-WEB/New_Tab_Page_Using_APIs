@@ -18,3 +18,4 @@
 - *style: 코드 모캣팅, 세미콜론 누락, 코드 변경 없을 경우*
 - *refactor: 코드 리펙토링*
 - *chore: 빌드 업무 수정, 패키지 수정*
+![GIF 2022-08-30 오후 3-07-37](https://user-images.githubusercontent.com/62277179/187363756-e37735d9-f9a6-4b8c-9a44-718e79695736.gif)
